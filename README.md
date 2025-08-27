@@ -16,21 +16,20 @@ A web application for sharing and discovering recipes. Users can register, login
 ---
 
 ## Features
+### User Authentication: 
+Secure login and registration system
 
-### User Authentication
-- Register a new account  
-- Login with email/username and password  
-- Profile management (update email, phone, bio)  
+### Recipe Management: 
+Create, view, and manage your recipes
 
-### Recipe Management
-- View recipes in a grid layout with images  
-- Sticky ingredients and recipe details  
-- *(Future)* Add, update, and delete recipes  
+### Categorization: 
+Mark recipes as Vegetarian or Non-Vegetarian
 
-### Team Collaboration
-- GitHub repository with branches for frontend, backend, and testing  
-- CI/CD pipeline with Jenkins  
-- Docker and Kubernetes deployment for containerized app
+### Search Functionality: 
+Find recipes by name, ingredients, or author
+
+### Filtering System: 
+Filter recipes by type (All, Vegetarian, Non-Vegetarian)
 
 ## Contributors
 - 23211A6766
