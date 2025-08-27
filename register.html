@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Recipe Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('register.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #5C6B73;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 35px;
+      background: rgba(249, 245, 240, 0.97);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(12px);
+      animation: fadeIn 0.5s ease-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(-20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo h1 {
+      font-size: 32px;
+      color: #2F4858;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 8px;
+      color: #2F4858;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #5C6B73;
+      font-size: 15px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #95a5a6;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 15px 14px 45px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s;
+      background: #fff;
+      color: #2F4858;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #E25822;
+      box-shadow: 0 0 0 3px rgba(226, 88, 34, 0.2);
+      background: #fff;
+    }
+
+    .input-group input:focus + i {
+      color: #E25822;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #95a5a6;
+      transition: color 0.3s;
+    }
+
+    .toggle-password:hover {
+      color: #E25822;
+    }
+
+    .terms {
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #5C6B73;
+    }
+
+    .terms label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .terms input {
+      margin-right: 8px;
+      accent-color: #E25822;
+    }
+
+    .terms a {
+      color: #E25822;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .terms a:hover {
+      color: #C13F16;
+      text-decoration: underline;
+    }
+
+    .btn-register {
+      width: 100%;
+      padding: 14px;
+      background: #E25822;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 6px rgba(226, 88, 34, 0.2);
+    }
+
+    .btn-register:hover {
+      background: #C13F16;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(226, 88, 34, 0.3);
+    }
+
+    .btn-register:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(226, 88, 34, 0.2);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+      color: #5C6B73;
+    }
+
+    .login-link a {
+      color: #E25822;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .login-link a:hover {
+      color: #C13F16;
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #c23b22;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      min-height: 20px;
+      padding: 8px 12px;
+      background: rgba(194, 59, 34, 0.1);
+      border-radius: 6px;
+      border-left: 3px solid #c23b22;
+    }
+
+    .success {
+      color: #27ae60;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      min-height: 20px;
+      padding: 8px 12px;
+      background: rgba(39, 174, 96, 0.1);
+      border-radius: 6px;
+      border-left: 3px solid #27ae60;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 30px 25px;
+        margin: 15px;
+      }
+      
+      .logo h1 {
+        font-size: 28px;
+      }
+      
+      body {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <div class="logo">
+        <h1>Recipe Hub</h1>
+      </div>
+      
+      <h2>Create Your Account</h2>
+      <p class="subtitle">Join our community of food lovers</p>
+      
+      <form id="registerForm">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="regUsername" placeholder="Username" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-user-circle"></i>
+          <input type="text" id="regName" placeholder="Full Name" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="regEmail" placeholder="Email" required>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="regPhone" placeholder="Phone (e.g., +91 9876543210)" required pattern="^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$">
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="regPassword" placeholder="Password" required>
+          <span class="toggle-password" id="togglePassword">
+            <i class="fas fa-eye"></i>
+          </span>
+        </div>
+        
+        <div class="terms">
+          <label>
+            <input type="checkbox" id="agreeTerms" required>
+            <span>I agree to the <a href="#">Terms & Conditions</a></span>
+          </label>
+        </div>
+        
+        <button type="submit" class="btn-register">
+          <span>Create Account</span>
+          <i class="fas fa-user-plus"></i>
+        </button>
+      </form>
+      
+      <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
+      <p id="registerError" class="error"></p>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const registerForm = document.getElementById('registerForm');
+      const togglePassword = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('regPassword');
+      const errorElement = document.getElementById('registerError');
+      const phoneInput = document.getElementById('regPhone');
+      
+      // Toggle password visibility
+      if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+          const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+          passwordInput.setAttribute('type', type);
+          
+          // Toggle eye icon
+          const eyeIcon = this.querySelector('i');
+          eyeIcon.classList.toggle('fa-eye');
+          eyeIcon.classList.toggle('fa-eye-slash');
+        });
+      }
+      
+      // Indian phone number validation
+      function validateIndianPhone(phone) {
+        const indianPhoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+        return indianPhoneRegex.test(phone.replace(/\s/g, ''));
+      }
+      
+      // Password strength validation
+      function validatePassword(password) {
+        // At least 8 characters, one uppercase, one lowercase, one number
+        const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        return strongRegex.test(password);
+      }
+      
+      // Check if username already exists
+      function isUsernameTaken(username) {
+        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+        return users.some(user => user.username === username);
+      }
+      
+      // Check if email already exists
+      function isEmailTaken(email) {
+        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+        return users.some(user => user.email === email);
+      }
+      
+      // Form submission
+      if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const username = document.getElementById('regUsername').value.trim();
+          const name = document.getElementById('regName').value.trim();
+          const email = document.getElementById('regEmail').value.trim();
+          const phone = document.getElementById('regPhone').value.trim();
+          const password = passwordInput.value;
+          const agreeTerms = document.getElementById('agreeTerms').checked;
+          
+          // Simple validation
+          if (!username || !name || !email || !phone || !password) {
+            showError('Please fill in all fields');
+            return;
+          }
+          
+          if (!agreeTerms) {
+            showError('You must agree to the terms and conditions');
+            return;
+          }
+          
+          // Validate email format
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            showError('Please enter a valid email address');
+            return;
+          }
+          
+          // Validate Indian phone number
+          if (!validateIndianPhone(phone)) {
+            showError('Please enter a valid Indian phone number (e.g., +91 9876543210)');
+            return;
+          }
+          
+          // Validate password strength
+          if (!validatePassword(password)) {
+            showError('Password must be at least 8 characters with uppercase, lowercase, and number');
+            return;
+          }
+          
+          // Check if username is already taken
+          if (isUsernameTaken(username)) {
+            showError('Username already exists. Please choose a different one.');
+            return;
+          }
+          
+          // Check if email is already taken
+          if (isEmailTaken(email)) {
+            showError('Email address is already registered.');
+            return;
+          }
+          
+          // Store user data
+          registerUser(username, name, email, phone, password);
+        });
+      }
+      
+      // Register user function
+      function registerUser(username, name, email, phone, password) {
+        errorElement.textContent = '';
+        
+        // Show loading state
+        const registerButton = registerForm.querySelector('button[type="submit"]');
+        const originalText = registerButton.innerHTML;
+        registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+        registerButton.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+          // Get existing users or create empty array
+          const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+          
+          // Add new user
+          users.push({
+            username,
+            name,
+            email,
+            phone,
+            password, // In a real app, this would be hashed
+            createdAt: new Date().toISOString()
+          });
+          
+          // Save updated users list
+          localStorage.setItem('recipeHubUsers', JSON.stringify(users));
+          
+          // Success
+          showSuccess('Registration successful! Redirecting to login...');
+          
+          // Redirect to login page after successful registration
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+        }, 1500);
+      }
+      
+      function showError(message) {
+        errorElement.textContent = message;
+        errorElement.className = 'error';
+      }
+      
+      function showSuccess(message) {
+        errorElement.textContent = message;
+        errorElement.className = 'success';
+      }
+      
+      // Real-time phone number formatting
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          
+          if (value.startsWith('91')) {
+            value = '+' + value;
+          } else if (value.startsWith('0')) {
+            value = '+91' + value.substring(1);
+          } else if (!value.startsWith('+91') && value.length > 0) {
+            value = '+91' + value;
+          }
+          
+          // Format with space after country code
+          if (value.length > 3) {
+            value = value.substring(0, 3) + ' ' + value.substring(3);
+          }
+          
+          // Limit to 14 characters (including + and space)
+          e.target.value = value.substring(0, 14);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
