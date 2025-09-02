@@ -280,7 +280,7 @@
         
         <div class="input-group">
           <i class="fas fa-phone"></i>
-          <input type="tel" id="regPhone" placeholder="Phone" required pattern="^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$">
+          <input type="tel" id="regPhone" placeholder="Phone" required pattern="^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$">
         </div>
         
         <div class="input-group">
@@ -345,7 +345,7 @@
 
     // Indian phone number validation
     function validateIndianPhone(phone) {
-      const indianPhoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+      const indianPhoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
       return indianPhoneRegex.test(phone.replace(/\s/g, ''));
     }
     
@@ -487,3 +487,4 @@
 
 </body>
 </html>
+
