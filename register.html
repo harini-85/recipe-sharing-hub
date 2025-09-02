@@ -261,14 +261,16 @@
       <p class="subtitle">Join our community of food lovers</p>
       
       <form id="registerForm">
-        <div class="input-group">
-          <i class="fas fa-user"></i>
-          <input type="text" id="regUsername" placeholder="Username" required>
-        </div>
+        
         
         <div class="input-group">
           <i class="fas fa-user-circle"></i>
           <input type="text" id="regName" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="regUsername" placeholder="Username" required>
         </div>
         
         <div class="input-group">
@@ -278,7 +280,7 @@
         
         <div class="input-group">
           <i class="fas fa-phone"></i>
-          <input type="tel" id="regPhone" placeholder="Phone (e.g., +91 9876543210)" required pattern="^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$">
+          <input type="tel" id="regPhone" placeholder="Phone" required pattern="^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$">
         </div>
         
         <div class="input-group">
@@ -308,182 +310,180 @@
   </div>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const registerForm = document.getElementById('registerForm');
-      const togglePassword = document.getElementById('togglePassword');
-      const passwordInput = document.getElementById('regPassword');
-      const errorElement = document.getElementById('registerError');
-      const phoneInput = document.getElementById('regPhone');
-      
-      // Toggle password visibility
-      if (togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', function() {
-          const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-          passwordInput.setAttribute('type', type);
-          
-          // Toggle eye icon
-          const eyeIcon = this.querySelector('i');
-          eyeIcon.classList.toggle('fa-eye');
-          eyeIcon.classList.toggle('fa-eye-slash');
-        });
-      }
-      
-      // Indian phone number validation
-      function validateIndianPhone(phone) {
-        const indianPhoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
-        return indianPhoneRegex.test(phone.replace(/\s/g, ''));
-      }
-      
-      // Password strength validation
-      function validatePassword(password) {
-        // At least 8 characters, one uppercase, one lowercase, one number
-        const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-        return strongRegex.test(password);
-      }
-      
-      // Check if username already exists
-      function isUsernameTaken(username) {
-        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
-        return users.some(user => user.username === username);
-      }
-      
-      // Check if email already exists
-      function isEmailTaken(email) {
-        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
-        return users.some(user => user.email === email);
-      }
-      
-      // Form submission
-      if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const username = document.getElementById('regUsername').value.trim();
-          const name = document.getElementById('regName').value.trim();
-          const email = document.getElementById('regEmail').value.trim();
-          const phone = document.getElementById('regPhone').value.trim();
-          const password = passwordInput.value;
-          const agreeTerms = document.getElementById('agreeTerms').checked;
-          
-          // Simple validation
-          if (!username || !name || !email || !phone || !password) {
-            showError('Please fill in all fields');
-            return;
-          }
-          
-          if (!agreeTerms) {
-            showError('You must agree to the terms and conditions');
-            return;
-          }
-          
-          // Validate email format
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            showError('Please enter a valid email address');
-            return;
-          }
-          
-          // Validate Indian phone number
-          if (!validateIndianPhone(phone)) {
-            showError('Please enter a valid Indian phone number (e.g., +91 9876543210)');
-            return;
-          }
-          
-          // Validate password strength
-          if (!validatePassword(password)) {
-            showError('Password must be at least 8 characters with uppercase, lowercase, and number');
-            return;
-          }
-          
-          // Check if username is already taken
-          if (isUsernameTaken(username)) {
-            showError('Username already exists. Please choose a different one.');
-            return;
-          }
-          
-          // Check if email is already taken
-          if (isEmailTaken(email)) {
-            showError('Email address is already registered.');
-            return;
-          }
-          
-          // Store user data
-          registerUser(username, name, email, phone, password);
-        });
-      }
-      
-      // Register user function
-      function registerUser(username, name, email, phone, password) {
-        errorElement.textContent = '';
+  document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('registerForm');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('regPassword');
+    const errorElement = document.getElementById('registerError');
+    const phoneInput = document.getElementById('regPhone');
+    
+    // Toggle password visibility
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
         
-        // Show loading state
-        const registerButton = registerForm.querySelector('button[type="submit"]');
-        const originalText = registerButton.innerHTML;
-        registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
-        registerButton.disabled = true;
-        
-        // Simulate API call
-        setTimeout(() => {
-          // Get existing users or create empty array
-          const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
-          
-          // Add new user
-          users.push({
-            username,
-            name,
-            email,
-            phone,
-            password, // In a real app, this would be hashed
-            createdAt: new Date().toISOString()
-          });
-          
-          // Save updated users list
-          localStorage.setItem('recipeHubUsers', JSON.stringify(users));
-          
-          // Success
-          showSuccess('Registration successful! Redirecting to login...');
-          
-          // Redirect to login page after successful registration
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 2000);
-        }, 1500);
-      }
-      
-      function showError(message) {
-        errorElement.textContent = message;
-        errorElement.className = 'error';
-      }
-      
-      function showSuccess(message) {
-        errorElement.textContent = message;
-        errorElement.className = 'success';
-      }
-      
-      // Real-time phone number formatting
-      if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-          let value = e.target.value.replace(/\D/g, '');
-          
-          if (value.startsWith('91')) {
-            value = '+' + value;
-          } else if (value.startsWith('0')) {
-            value = '+91' + value.substring(1);
-          } else if (!value.startsWith('+91') && value.length > 0) {
-            value = '+91' + value;
-          }
-          
-          // Format with space after country code
-          if (value.length > 3) {
-            value = value.substring(0, 3) + ' ' + value.substring(3);
-          }
-          
-          // Limit to 14 characters (including + and space)
-          e.target.value = value.substring(0, 14);
-        });
-      }
-    });
-  </script>
-</body>
+        const eyeIcon = this.querySelector('i');
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+      });
+    }
+    
+    // Username validation
+    function validateUsername(username) {
+      // Start with a letter, only letters, digits, underscores, 3–20 chars
+      const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{2,19}$/;
+      return usernameRegex.test(username);
+    }
 
+    // Name validation
+    function validateName(name) {
+      // Only alphabets and spaces, no consecutive spaces, 2–50 chars
+      const nameRegex = /^(?!.*\s{2})[A-Za-z ]{2,50}$/;
+      return nameRegex.test(name);
+    }
+
+    // Indian phone number validation
+    function validateIndianPhone(phone) {
+      const indianPhoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+      return indianPhoneRegex.test(phone.replace(/\s/g, ''));
+    }
+    
+    // Password strength validation
+    function validatePassword(password) {
+      const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      return strongRegex.test(password);
+    }
+    
+    function isUsernameTaken(username) {
+      const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+      return users.some(user => user.username === username);
+    }
+    
+    function isEmailTaken(email) {
+      const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+      return users.some(user => user.email === email);
+    }
+    
+    if (registerForm) {
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('regUsername').value.trim();
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const password = passwordInput.value;
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+        
+        if (!username || !name || !email || !phone || !password) {
+          showError('Please fill in all fields');
+          return;
+        }
+        
+        if (!agreeTerms) {
+          showError('You must agree to the terms and conditions');
+          return;
+        }
+
+        // Validate username
+        if (!validateUsername(username)) {
+          showError('Username must start with a letter, 3–20 chars, only letters, digits, and underscores.');
+          return;
+        }
+
+        if (isUsernameTaken(username)) {
+          showError('Username already exists. Please choose a different one.');
+          return;
+        }
+
+        // Validate name
+        if (!validateName(name)) {
+          showError('Name must be 2–50 letters, spaces allowed, no numbers or consecutive spaces.');
+          return;
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showError('Please enter a valid email address');
+          return;
+        }
+        
+        // Validate phone
+        if (!validateIndianPhone(phone)) {
+          showError('Please enter a valid Indian phone number (e.g., +91 9876543210)');
+          return;
+        }
+        
+        // Validate password
+        if (!validatePassword(password)) {
+          showError('Password must be at least 8 characters with uppercase, lowercase, and number');
+          return;
+        }
+        
+        if (isEmailTaken(email)) {
+          showError('Email address is already registered.');
+          return;
+        }
+        
+        registerUser(username, name, email, phone, password);
+      });
+    }
+    
+    function registerUser(username, name, email, phone, password) {
+      errorElement.textContent = '';
+      const registerButton = registerForm.querySelector('button[type="submit"]');
+      const originalText = registerButton.innerHTML;
+      registerButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+      registerButton.disabled = true;
+      
+      setTimeout(() => {
+        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+        users.push({
+          username,
+          name,
+          email,
+          phone,
+          password,
+          createdAt: new Date().toISOString()
+        });
+        localStorage.setItem('recipeHubUsers', JSON.stringify(users));
+        showSuccess('Registration successful! Redirecting to login...');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 2000);
+      }, 1500);
+    }
+    
+    function showError(message) {
+      errorElement.textContent = message;
+      errorElement.className = 'error';
+    }
+    
+    function showSuccess(message) {
+      errorElement.textContent = message;
+      errorElement.className = 'success';
+    }
+    
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.startsWith('91')) {
+          value = '+' + value;
+        } else if (value.startsWith('0')) {
+          value = '+91' + value.substring(1);
+        } else if (!value.startsWith('+91') && value.length > 0) {
+          value = '+91' + value;
+        }
+        if (value.length > 3) {
+          value = value.substring(0, 3) + ' ' + value.substring(3);
+        }
+        e.target.value = value.substring(0, 14);
+      });
+    }
+  });
+</script>
+
+</body>
 </html>
