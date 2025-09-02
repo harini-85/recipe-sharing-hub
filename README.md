@@ -6,7 +6,7 @@ A web application for sharing and discovering recipes. Users can register, login
 ## Project Overview
 
 - **Frontend:** HTML, CSS, JavaScript  
-- **Backend:** Node.js (Express) / Python Flask  
+- **Backend:** Node.js (Express) 
 - **Database:** MySQL   
 - **CI/CD:** Jenkins integration (GitHub connected)  
 - **Deployment:** Docker containers, Kubernetes  
