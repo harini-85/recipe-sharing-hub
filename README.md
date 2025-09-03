@@ -7,7 +7,7 @@ A web application for sharing and discovering recipes. Users can register, login
 
 - **Frontend:** HTML, CSS, JavaScript  
 - **Backend:** Node.js (Express) 
-- **Database:** MySQL   
+- **Database:** MySQL/MongoDB   
 - **CI/CD:** Jenkins integration (GitHub connected)  
 - **Deployment:** Docker containers, Kubernetes  
 - **Testing:** Manual and automated tests (Selenium / Unit Tests)  
