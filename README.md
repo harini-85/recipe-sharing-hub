@@ -20,4 +20,4 @@ A web application for sharing and discovering recipes. Users can register, login
 - 23211A6780 - Harini
 - 23211A67a2 - Manvitha
 - 24215A67a8 - S. Sanjana
-- 24215A67c5 -Zunera
+- 24215A67c5 - Zunera
