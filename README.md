@@ -1,6 +1,6 @@
 # 🍲 Recipe Sharing Hub
 
-## 📖 Project Description  
+## Project Description  
 **Recipe Sharing Hub** is a full-stack web application designed for food lovers to share, discover, and organize recipes in one place. The platform allows users to:  
 - **Register & Login** to create a secure account.  
 - **Create, edit, and delete recipes** with ingredients, preparation steps, and images.  
@@ -12,7 +12,7 @@ The application is built with a modern development workflow including **CI/CD pi
  
 ---
 
-## 🛠️ Tech Stack
+## 🛠Tech Stack
 **Frontend:** HTML, CSS, JavaScript  
 **Backend:** Node.js (Express)  
 **Database:** MySQL / MongoDB  
@@ -22,7 +22,7 @@ The application is built with a modern development workflow including **CI/CD pi
 
 ---
 
-## 👥 Team
+## Team
 | Roll Number | Name            | Roles & Responsibilities      |
 |-------------|-----------------|-------------------------------|
 | 23211A6766  | M. Sai Ravalika | Kubernetes, Coding            |
