@@ -280,91 +280,94 @@
   </div>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const loginForm = document.getElementById('loginForm');
-      const togglePassword = document.getElementById('togglePassword');
-      const passwordInput = document.getElementById('loginPassword');
-      const errorElement = document.getElementById('loginError');
-      
-      // Toggle password visibility
-      if (togglePassword && passwordInput) {
-        togglePassword.addEventListener('click', function() {
-          const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-          passwordInput.setAttribute('type', type);
-          
-          // Toggle eye icon
-          const eyeIcon = this.querySelector('i');
-          eyeIcon.classList.toggle('fa-eye');
-          eyeIcon.classList.toggle('fa-eye-slash');
-        });
-      }
-      
-      // Form submission
-      if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const username = document.getElementById('loginUsername').value;
-          const password = passwordInput.value;
-          
-          // Simple validation
-          if (!username || !password) {
-            showError('Please fill in all fields');
-            return;
-          }
-          
-          // Authenticate user
-          authenticateUser(username, password);
-        });
-      }
-      
-      // Authenticate user function
-      function authenticateUser(username, password) {
-        errorElement.textContent = '';
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('loginPassword');
+    const errorElement = document.getElementById('loginError');
+    
+    // Toggle password visibility
+    if (togglePassword && passwordInput) {
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
         
-        // Show loading state
-        const loginButton = loginForm.querySelector('button[type="submit"]');
-        const originalText = loginButton.innerHTML;
-        loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-        loginButton.disabled = true;
+        // Toggle eye icon
+        const eyeIcon = this.querySelector('i');
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+      });
+    }
+    
+    // Form submission
+    if (loginForm) {
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        // Simulate API call
-        setTimeout(() => {
-          const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
-          const user = users.find(u => u.username === username && u.password === password);
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = passwordInput.value;
+        
+        // Simple validation
+        if (!username || !password) {
+          showError('Please fill in all fields');
+          return;
+        }
+        
+        // Authenticate user
+        authenticateUser(username, password);
+      });
+    }
+    
+    // Authenticate user function
+    function authenticateUser(username, password) {
+      errorElement.textContent = '';
+      
+      // Show loading state
+      const loginButton = loginForm.querySelector('button[type="submit"]');
+      const originalText = loginButton.innerHTML;
+      loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+      loginButton.disabled = true;
+      
+      // Simulate API call
+      setTimeout(() => {
+        const users = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+          // ✅ Save all details including phone
+          localStorage.setItem('recipeHubCurrentUser', JSON.stringify({
+            username: user.username,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,   // Added phone
+            loggedInAt: new Date().toISOString()
+          }));
           
-          if (user) {
-            localStorage.setItem('recipeHubCurrentUser', JSON.stringify({
-              username: user.username,
-              name: user.name,
-              email: user.email,
-              loggedInAt: new Date().toISOString()
-            }));
-            
-            showSuccess('Login successful! Redirecting...');
-            
-            setTimeout(() => {
-              window.location.href = 'main.html';
-            }, 1500);
-          } else {
-            showError('Invalid username or password');
-            loginButton.innerHTML = originalText;
-            loginButton.disabled = false;
-          }
-        }, 1500);
-      }
-      
-      function showError(message) {
-        errorElement.textContent = message;
-        errorElement.style.color = '#c23b22';
-      }
-      
-      function showSuccess(message) {
-        errorElement.textContent = message;
-        errorElement.style.color = '#27ae60';
-      }
-    });
-  </script>
+          showSuccess('Login successful! Redirecting...');
+          
+          setTimeout(() => {
+            window.location.href = 'main.html'; // Redirect to main page
+          }, 1500);
+        } else {
+          showError('Invalid username or password');
+          loginButton.innerHTML = originalText;
+          loginButton.disabled = false;
+        }
+      }, 1500);
+    }
+    
+    function showError(message) {
+      errorElement.textContent = message;
+      errorElement.style.color = '#c23b22';
+    }
+    
+    function showSuccess(message) {
+      errorElement.textContent = message;
+      errorElement.style.color = '#27ae60';
+    }
+  });
+</script>
+
 </body>
 </html>
 
