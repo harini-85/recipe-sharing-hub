@@ -331,14 +331,12 @@
     
     // Username validation
     function validateUsername(username) {
-      // Start with a letter, only letters, digits, underscores, 3–20 chars
       const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{2,19}$/;
       return usernameRegex.test(username);
     }
 
     // Name validation
     function validateName(name) {
-      // Only alphabets and spaces, no consecutive spaces, 2–50 chars
       const nameRegex = /^(?!.*\s{2})[A-Za-z ]{2,50}$/;
       return nameRegex.test(name);
     }
@@ -449,9 +447,10 @@
           createdAt: new Date().toISOString()
         });
         localStorage.setItem('recipeHubUsers', JSON.stringify(users));
+
         showSuccess('Registration successful! Redirecting to login...');
         setTimeout(() => {
-          window.location.href = 'login.html';
+          window.location.href = 'login.html'; // ✅ Redirect to login (not auto-login)
         }, 2000);
       }, 1500);
     }
