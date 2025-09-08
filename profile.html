@@ -391,6 +391,14 @@
         flex-direction: column;
       }
     }
+    .debug-panel {
+  display: none !important; /* removes it completely */
+}
+
+.page-spacer {
+  height: 120px; /* fake space instead */
+}
+
   </style>
 </head>
 <body>
@@ -398,11 +406,15 @@
     <div class="header-content">
       <h1><i class="fas fa-user-circle"></i> My Profile</h1>
       <nav>
+        <!-- ✅ Home button -->
         <a href="main.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <!-- ✅ Logout button -->
         <button onclick="logout()" class="nav-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </nav>
     </div>
   </header>
+  
+
 
   <main class="container">
     <section class="profile-section">
@@ -445,9 +457,19 @@
       <div id="emptyRecipes" class="empty-state" style="display: none;">
         <i class="fas fa-utensils"></i>
         <h3>No recipes yet</h3>
-        <p>You haven't created any recipes yet. <a href="main.html">Add your first recipe</a></p>
+        <p>You haven't created any recipes yet. <a href="#">Add your first recipe</a></p>
       </div>
     </section>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel">
+      <h3><i class="fas fa-bug"></i> Debug Information</h3>
+      <p>This panel shows what's stored in localStorage to help identify the issue:</p>
+      <pre id="debugOutput">Loading debug data...</pre>
+      <button onclick="refreshDebugInfo()" class="btn-secondary">
+        <i class="fas fa-sync-alt"></i> Refresh Debug Info
+      </button>
+    </div>  
 
     <!-- Edit Recipe Modal -->
     <div id="editModal" class="modal">
@@ -507,27 +529,27 @@
   </main>
 
   <script>
-    // Check if user is logged in
+    // ✅ Check if user is logged in
     function checkAuth() {
       const user = JSON.parse(localStorage.getItem('recipeHubCurrentUser') || 'null');
       if (!user) {
-        window.location.href = 'login.html';
-        return false;
+        window.location.href = 'login.html'; // redirect if not logged in
+        return null;
       }
       return user;
     }
 
-    // Logout function
+    // ✅ Logout function
     function logout() {
       localStorage.removeItem('recipeHubCurrentUser');
-      window.location.href = 'login.html';
+      alert("You have been logged out!");
+      window.location.href = 'login.html'; // redirect to login
     }
 
     // Load user profile
     function loadUserProfile() {
       const user = checkAuth();
       if (!user) return;
-      
       document.getElementById('profileUsername').value = user.username || '';
       document.getElementById('profileName').value = user.name || '';
       document.getElementById('profileEmail').value = user.email || '';
@@ -538,21 +560,16 @@
     function loadUserRecipes() {
       const user = checkAuth();
       if (!user) return;
-      
       const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
       const userRecipes = recipes.filter(recipe => recipe.author === user.username);
       const recipeList = document.getElementById('myRecipeList');
       const emptyState = document.getElementById('emptyRecipes');
-      
       recipeList.innerHTML = '';
-      
       if (userRecipes.length === 0) {
         emptyState.style.display = 'block';
         return;
       }
-      
       emptyState.style.display = 'none';
-      
       userRecipes.forEach(recipe => {
         const recipeCard = document.createElement('div');
         recipeCard.className = 'recipe-card';
@@ -580,18 +597,14 @@
     function openEditModal(recipeId) {
       const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
       const recipe = recipes.find(r => r.id === recipeId);
-      
       if (!recipe) return;
-      
       document.getElementById('editRecipeId').value = recipe.id;
       document.getElementById('editRecipeTitle').value = recipe.title;
       document.getElementById('editRecipeType').value = recipe.type;
       document.getElementById('editRecipeIngredients').value = recipe.ingredients;
       document.getElementById('editRecipeInstructions').value = recipe.instructions;
-      
       document.getElementById('editModal').style.display = 'flex';
     }
-
     function closeEditModal() {
       document.getElementById('editModal').style.display = 'none';
     }
@@ -602,7 +615,6 @@
       document.getElementById('confirmDelete').dataset.recipeId = recipeId;
       document.getElementById('deleteModal').style.display = 'flex';
     }
-
     function closeDeleteModal() {
       document.getElementById('deleteModal').style.display = 'none';
     }
@@ -610,24 +622,19 @@
     // Handle edit recipe form submission
     document.getElementById('editRecipeForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
       const recipeId = document.getElementById('editRecipeId').value;
       const title = document.getElementById('editRecipeTitle').value;
       const type = document.getElementById('editRecipeType').value;
       const ingredients = document.getElementById('editRecipeIngredients').value;
       const instructions = document.getElementById('editRecipeInstructions').value;
-      
       if (!title || !type || !ingredients || !instructions) {
         alert('Please fill all fields');
         return;
       }
-      
       const user = checkAuth();
       if (!user) return;
-      
       const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
       const recipeIndex = recipes.findIndex(r => r.id === recipeId);
-      
       if (recipeIndex !== -1) {
         recipes[recipeIndex] = {
           ...recipes[recipeIndex],
@@ -636,7 +643,6 @@
           ingredients,
           instructions
         };
-        
         localStorage.setItem('recipeHubRecipes', JSON.stringify(recipes));
         closeEditModal();
         loadUserRecipes();
@@ -646,27 +652,29 @@
     // Handle delete confirmation
     document.getElementById('confirmDelete').addEventListener('click', function() {
       const recipeId = this.dataset.recipeId;
-      
       const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
       const updatedRecipes = recipes.filter(recipe => recipe.id !== recipeId);
-      
       localStorage.setItem('recipeHubRecipes', JSON.stringify(updatedRecipes));
       closeDeleteModal();
       loadUserRecipes();
     });
 
+    // Debug functions
+    function refreshDebugInfo() {
+      const currentUser = JSON.parse(localStorage.getItem('recipeHubCurrentUser') || 'null');
+      const allUsers = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const debugOutput = document.getElementById('debugOutput');
+      debugOutput.textContent = `Current User: ${JSON.stringify(currentUser, null, 2)}\n\nAll Users: ${JSON.stringify(allUsers, null, 2)}\n\nRecipes: ${JSON.stringify(recipes, null, 2)}`;
+    }
+
     // Initialize the page
     document.addEventListener('DOMContentLoaded', function() {
       const user = checkAuth();
       if (!user) return;
-      
-      // Load user profile
       loadUserProfile();
-      
-      // Load user's recipes
       loadUserRecipes();
-      
-      // Close modals when clicking outside
+      refreshDebugInfo();
       window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
           closeEditModal();
