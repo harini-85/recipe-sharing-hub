@@ -27,11 +27,11 @@ The application is built with a modern development workflow including **CI/CD pi
 |-------------|-----------------|-------------------------------|
 | 23211A6766  | M. Sai Ravalika | Kubernetes, Coding            |
 | 23211A6767  | M. Shriya       | Coding                        |
-| 23211A6772  | M. Harshitha    | Testing                       |
+| 23211A6772  | M. Harshitha    | Deployment                    |
 | 23211A6780  | N. Harini       | Jenkins, GitHub               |
 | 23211A67A2  | R. Manvitha     | Docker, Coding                |
 | 23211A67A8  | S. Sanjana      | GitHub                        |
-| 23211A67C5  | Zunera          | Testing, Deployment           |
+| 23211A67C5  | Zunera          | Testing                       |
 
 ---
 
