@@ -41,6 +41,13 @@ The application is built with a modern development workflow including **CI/CD pi
 recipe-hub-backend/
 ├── config/
 │   └── database.js          # Database configuration
+├── frontend/
+│   ├── login.html
+│   ├── login.jpg
+│   ├── main.html
+│   ├── profile.html
+│   ├── register.html           # Recipe management routes
+│   └── register.jpg             # User management routes
 ├── middleware/
 │   └── auth.js              # Authentication middleware
 ├── models/
@@ -124,4 +131,3 @@ Authorization: Bearer <your_jwt_token>
 
 
 Update your frontend JavaScript to use the API instead of localStorage. See the integration guide in the next section.
->>>>>>> master
