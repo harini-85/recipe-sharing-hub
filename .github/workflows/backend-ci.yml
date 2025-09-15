@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use Windows runner since your Jenkins setup is Windows
+    runs-on: windows-latest  # You can switch to ubuntu-latest if you prefer Linux runner
 
     steps:
       # Step 1: Checkout code
@@ -21,25 +21,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'   # Change to 18 or 22 if needed
+          node-version: '20'
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: ./backend
 
-      # Step 4: Run tests (dummy for now)
+      # Step 4: Run tests
       - name: Run tests
         run: npm test
-        working-directory: ./backend
 
       # Step 5: Build successful
       - name: Build successful
         run: echo "Backend build successful ✅"
 
-      # Step 6: Check MongoDB connection (Optional)
+      # Step 6: Verify MongoDB secret
       - name: Verify MongoDB secret
-        run: |
-          echo "MONGO_URI is set"
+        run: echo "MONGO_URI is set"
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
