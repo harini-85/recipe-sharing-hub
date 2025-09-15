@@ -1,41 +1,89 @@
 # 🍲 Recipe Sharing Hub
 
-## Project Description  
-**Recipe Sharing Hub** is a full-stack web application designed for food lovers to share, discover, and organize recipes in one place. The platform allows users to:  
-- **Register & Login** to create a secure account.  
-- **Create, edit, and delete recipes** with ingredients, preparation steps. 
-- **Browse and search recipes** shared by other users in an interactive feed.  
-- **View user profiles** to explore recipes contributed by specific members.  
+## 📖 Overview  
+**Recipe Sharing Hub** is a full-stack web application that allows food enthusiasts to share, discover, and manage recipes on a single platform. It provides a seamless experience for users to create accounts, post their favorite recipes, browse others’ creations, and connect with fellow food lovers.
 
-The application is built with a modern development workflow including **CI/CD pipelines, containerization, and Kubernetes orchestration**, making it both scalable and reliable.  
- 
----
-
-## 🛠Tech Stack
-**Frontend:** HTML, CSS, JavaScript  
-**Backend:** Node.js (Express)  
-**Database:** MongoDB  
-**CI/CD:** Jenkins (GitHub integrated)  
-**Deployment:** Docker containers, Kubernetes  
-**Testing:** Manual and automated tests  
+This platform is built with a robust tech stack and a modern DevOps workflow using **CI/CD pipelines**, **containerization**, and **Kubernetes orchestration** to ensure **scalability, reliability, and continuous delivery**.
 
 ---
 
-## Team
-| Roll Number | Name            | Roles & Responsibilities      |
-|-------------|-----------------|-------------------------------|
-| 23211A6766  | M. Sai Ravalika | Kubernetes, Coding            |
-| 23211A6767  | M. Shriya       | Coding                        |
-| 23211A6772  | M. Harshitha    | Deployment                    |
-| 23211A6780  | N. Harini       | Jenkins, GitHub               |
-| 23211A67A2  | R. Manvitha     | Docker, Coding                |
-| 23211A67A8  | S. Sanjana      | GitHub                        |
-| 23211A67C5  | Zunera          | Testing                       |
+## ✨ Features  
+- 🔐 **User Authentication** — Secure registration and login with JWT-based authentication  
+- ✍️ **Recipe Management** — Create, edit, delete recipes with ingredients and preparation steps  
+- 🔎 **Search & Filter** — Find recipes by title, ingredients, author, or dietary type (veg/non-veg)  
+- 🧑‍🤝‍🧑 **User Profiles** — View recipes created by specific users  
+- ⚡ **Interactive UI** — Clean, responsive, and user-friendly frontend  
+- ⚙️ **CI/CD Integration** — Jenkins pipeline for automated build and test  
+- 📦 **Containerized Deployment** — Dockerized app deployed and orchestrated via Kubernetes  
+- ✅ **Testing** — Manual and automated test coverage  
 
+---
 
+## 🛠 Tech Stack
 
+| Layer          | Technology                       |
+|----------------|----------------------------------|
+| **Frontend**   | HTML, CSS, JavaScript            |
+| **Backend**    | Node.js (Express.js)             |
+| **Database**   | MongoDB                          |
+| **CI/CD**      | Jenkins (integrated with GitHub) |
+| **Deployment** | Docker, Kubernetes               |
+| **Testing**    | Manual & automated tests         |
 
-## 📁 Folder Structure
+---
+
+## 👥 Team
+
+| Roll Number | Name               | Roles & Responsibilities          |
+|-------------|--------------------|-----------------------------------|
+| 23211A6766  | M. Sai Ravalika    | Kubernetes, Backend Development   |
+| 23211A6767  | M. Shriya          | Frontend Development              |
+| 23211A6772  | M. Harshitha       | Deployment                        |
+| 23211A6780  | N. Harini          | Jenkins CI/CD, GitHub Integration |
+| 23211A67A2  | R. Manvitha        | Docker, Authentication, Backend   |
+| 23211A67A8  | S. Sanjana         | GitHub Repository Management      |
+| 23211A67C5  | Zunera             | Testing                           |
+
+---
+
+## 📌 Members’ Contribution Summary  
+
+### 👩‍💻 **S. Sanjana (23211A67A8)**
+- Managed GitHub repository & version control  
+- Implemented branching strategy and pull request workflow  
+- Resolved merge conflicts  
+- Reviewed and merged pull requests  
+
+### 👩‍💻 **M. Shriya (23211A6767)**
+- Built responsive UI using HTML, CSS, JavaScript  
+- Implemented recipe search and filtering (veg/non-veg)  
+- Added client-side validations and error handling  
+
+### 👩‍💻 **N. Harini (23211A6780)**
+- Set up project repository  
+- Configured Jenkins CI/CD pipeline  
+- Integrated GitHub with Jenkins  
+- Automated build and test pipeline with notifications  
+
+### 👩‍💻 **Zunera Amber (23211A67C5)**
+- Authored and managed manual test cases  
+
+### 👩‍💻 **R. Manvitha (23211A67A2)**
+- Integrated frontend with backend APIs  
+- Designed MongoDB schema  
+- Added robust validation and error handling  
+
+### 👩‍💻 **M. Sai Ravalika (23211A6766)**
+- Developed backend APIs using Node.js and Express.js  
+- Implemented password hashing, JWT authentication, and input validation  
+- Managed user registration and login logic  
+
+### 👩‍💻 **M. Harshitha (23211A6772)**
+- Responsible for deployment (in progress)
+
+---
+
+## 📁 Project Structure
 
 ```
 recipe-hub-backend/
@@ -127,4 +175,15 @@ Authorization: Bearer <your_jwt_token>
 - **Recipe Title**: 3-100 characters
 - **Recipe Ingredients**: Minimum 10 characters
 - **Recipe Instructions**: Minimum 20 characters
+
+## 🚀 Future Enhancements
+
+Here are some planned improvements and features to enhance the functionality and user experience of the Recipe Sharing Hub:
+
+- 💬 **Comments & Ratings** — Allow users to comment on and rate recipes
+- 🖼️ **Image Upload** — Enable users to upload images of their dishes
+- 🔐 **Social Authentication** — Login using Google account
+- 📱 **PWA (Progressive Web App)** — Add offline support and installable app features
+- 📌 **Bookmark & Favorites** — Save recipes to personal collections
+- 🌐 **Multi-language Support** — Localize the UI for different languages
 
