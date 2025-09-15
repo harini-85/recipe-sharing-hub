@@ -125,9 +125,6 @@ Authorization: Bearer <your_jwt_token>
 - **Phone**: Indian phone number format (+91 XXXXXXXXXX)
 - **Password**: Minimum 8 characters with uppercase, lowercase, and number
 - **Recipe Title**: 3-100 characters
-- **Ingredients**: Minimum 10 characters
-- **Instructions**: Minimum 20 characters
+- **Recipe Ingredients**: Minimum 10 characters
+- **Recipe Instructions**: Minimum 20 characters
 
-
-
-Update your frontend JavaScript to use the API instead of localStorage. See the integration guide in the next section.
