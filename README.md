@@ -46,8 +46,8 @@ recipe-hub-backend/
 │   ├── login.jpg
 │   ├── main.html
 │   ├── profile.html
-│   ├── register.html           # Recipe management routes
-│   └── register.jpg             # User management routes
+│   ├── register.html          
+│   └── register.jpg          
 ├── middleware/
 │   └── auth.js              # Authentication middleware
 ├── models/
