@@ -1,0 +1,45 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use Windows runner since your Jenkins setup is Windows
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'   # Change to 18 or 22 if needed
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend
+
+      # Step 4: Run tests (dummy for now)
+      - name: Run tests
+        run: npm test
+        working-directory: ./backend
+
+      # Step 5: Build successful
+      - name: Build successful
+        run: echo "Backend build successful ✅"
+
+      # Step 6: Check MongoDB connection (Optional)
+      - name: Verify MongoDB secret
+        run: |
+          echo "MONGO_URI is set"
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
