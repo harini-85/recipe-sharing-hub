@@ -3,10 +3,9 @@
 ## Project Description  
 **Recipe Sharing Hub** is a full-stack web application designed for food lovers to share, discover, and organize recipes in one place. The platform allows users to:  
 - **Register & Login** to create a secure account.  
-- **Create, edit, and delete recipes** with ingredients, preparation steps, and images.  
+- **Create, edit, and delete recipes** with ingredients, preparation steps. 
 - **Browse and search recipes** shared by other users in an interactive feed.  
 - **View user profiles** to explore recipes contributed by specific members.  
-- **Engage with a clean, responsive interface** that works across desktop and mobile devices.  
 
 The application is built with a modern development workflow including **CI/CD pipelines, containerization, and Kubernetes orchestration**, making it both scalable and reliable.  
  
@@ -15,7 +14,7 @@ The application is built with a modern development workflow including **CI/CD pi
 ## 🛠Tech Stack
 **Frontend:** HTML, CSS, JavaScript  
 **Backend:** Node.js (Express)  
-**Database:** MySQL / MongoDB  
+**Database:** MongoDB  
 **CI/CD:** Jenkins (GitHub integrated)  
 **Deployment:** Docker containers, Kubernetes  
 **Testing:** Manual and automated tests  
