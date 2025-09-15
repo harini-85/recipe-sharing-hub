@@ -66,7 +66,7 @@ This platform is built with a robust tech stack and a modern DevOps workflow usi
 - Automated build and test pipeline with notifications  
 
 ### 👩‍💻 **Zunera Amber (23211A67C5)**
-- Authored and managed manual test cases  
+- Preparing test cases – **in progress**
 
 ### 👩‍💻 **R. Manvitha (23211A67A2)**
 - Integrated frontend with backend APIs  
@@ -76,10 +76,12 @@ This platform is built with a robust tech stack and a modern DevOps workflow usi
 ### 👩‍💻 **M. Sai Ravalika (23211A6766)**
 - Developed backend APIs using Node.js and Express.js  
 - Implemented password hashing, JWT authentication, and input validation  
-- Managed user registration and login logic  
+- Managed user registration and login logic
+- Kubernetes setup – **yet to be started**
+
 
 ### 👩‍💻 **M. Harshitha (23211A6772)**
-- Responsible for deployment (in progress)
+- Responsible for deployment **yet to be started**
 
 ---
 
