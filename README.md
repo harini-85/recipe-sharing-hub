@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🍲 Recipe Sharing Hub
 
 ## Project Description  
@@ -33,22 +32,8 @@ The application is built with a modern development workflow including **CI/CD pi
 | 23211A67A8  | S. Sanjana      | GitHub                        |
 | 23211A67C5  | Zunera          | Testing                       |
 
----
 
 
-=======
-# Recipe Hub Backend API
-
-A complete backend API for the Recipe Hub application built with Node.js, Express.js, and MongoDB.
-
-## 🚀 Features
-
-- **User Authentication**: Registration, login with JWT tokens
-- **Recipe Management**: Full CRUD operations for recipes
-- **Search & Filter**: Search recipes by title, ingredients, or author
-- **Security**: Password hashing, JWT authentication, input validation
-- **Data Persistence**: MongoDB with Mongoose ODM
-- **Error Handling**: Comprehensive error handling and validation
 
 ## 📁 Folder Structure
 
@@ -117,90 +102,6 @@ npm start
 http://localhost:5000/api
 ```
 
-### Authentication Endpoints
-
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
-
-{
-  "username": "johndoe",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "phone": "+91 9876543210",
-  "password": "SecurePass123"
-}
-```
-
-#### Login User
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "username": "johndoe",
-  "password": "SecurePass123"
-}
-```
-
-#### Get Profile
-```http
-GET /api/auth/profile
-Authorization: Bearer <jwt_token>
-```
-
-### Recipe Endpoints
-
-#### Get All Recipes
-```http
-GET /api/recipes?search=chicken&type=non-veg&page=1&limit=10
-```
-
-#### Get Single Recipe
-```http
-GET /api/recipes/:id
-```
-
-#### Create Recipe
-```http
-POST /api/recipes
-Authorization: Bearer <jwt_token>
-Content-Type: application/json
-
-{
-  "title": "Chicken Tikka Masala",
-  "type": "non-veg",
-  "ingredients": "Chicken breast\nYogurt\nTomato puree\nCream\nSpices",
-  "instructions": "1. Marinate chicken\n2. Grill chicken\n3. Prepare gravy\n4. Combine and serve"
-}
-```
-
-#### Update Recipe
-```http
-PUT /api/recipes/:id
-Authorization: Bearer <jwt_token>
-Content-Type: application/json
-
-{
-  "title": "Updated Recipe Title",
-  "type": "veg",
-  "ingredients": "Updated ingredients",
-  "instructions": "Updated instructions"
-}
-```
-
-#### Delete Recipe
-```http
-DELETE /api/recipes/:id
-Authorization: Bearer <jwt_token>
-```
-
-#### Get My Recipes
-```http
-GET /api/recipes/my/recipes
-Authorization: Bearer <jwt_token>
-```
 
 ## 🔐 Authentication
 
@@ -220,33 +121,7 @@ Authorization: Bearer <your_jwt_token>
 - **Ingredients**: Minimum 10 characters
 - **Instructions**: Minimum 20 characters
 
-## 🚦 Error Handling
 
-The API returns consistent error responses:
-
-```json
-{
-  "success": false,
-  "message": "Error description",
-  "errors": ["Detailed error messages"]
-}
-```
-
-## 🔧 Testing the API
-
-Use tools like Postman, curl, or any HTTP client:
-
-```bash
-# Test health endpoint
-curl http://localhost:5000/api/health
-
-# Register a new user
-curl -X POST http://localhost:5000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"testuser","name":"Test User","email":"test@example.com","phone":"+91 9876543210","password":"TestPass123"}'
-```
-
-## 📱 Frontend Integration
 
 Update your frontend JavaScript to use the API instead of localStorage. See the integration guide in the next section.
 >>>>>>> master
