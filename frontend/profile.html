@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Recipe Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f9f5f0;
+      color: #2F4858;
+      min-height: 100vh;
+    }
+
+    /* Header Styles */
+    header {
+      background: #2F4858;
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    header h1 i {
+      margin-right: 10px;
+      color: #E25822;
+    }
+
+    nav a, nav button {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      background: #E25822;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover, nav button:hover {
+      background: #C13F16;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #E25822;
+      padding-bottom: 0.5rem;
+    }
+
+    .section-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #2F4858;
+    }
+
+    .section-header p {
+      color: #5C6B73;
+      margin-top: 0.5rem;
+    }
+
+    .profile-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1.2rem;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      color: #5C6B73;
+    }
+
+    .input-group input, .input-group textarea, .input-group select {
+      width: 100%;
+      padding: 12px 15px 12px 45px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8f9fa;
+      transition: all 0.3s;
+    }
+
+    .input-group input:disabled {
+      background: #e9ecef;
+      color: #6c757d;
+    }
+
+    .btn-primary {
+      background: #E25822;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 6px rgba(226, 88, 34, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: #C13F16;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(226, 88, 34, 0.3);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+
+    .btn-edit {
+      background: #17a2b8;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-edit:hover {
+      background: #138496;
+      transform: translateY(-2px);
+    }
+
+    /* Recipe Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      position: relative;
+      padding: 1.5rem;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .recipe-card h3 {
+      margin-bottom: 0.8rem;
+      color: #2F4858;
+      font-size: 1.3rem;
+      padding-right: 30px; /* Space for the veg indicator */
+    }
+
+    .recipe-card p {
+      color: #5C6B73;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .recipe-card .author {
+      color: #E25822;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .recipe-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .veg-indicator {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .veg {
+      background: #4CAF50;
+    }
+
+    .non-veg {
+      background: #F44336;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .confirm-modal {
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #5C6B73;
+      transition: color 0.3s;
+    }
+
+    .close:hover {
+      color: #E25822;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #5C6B73;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #95a5a6;
+    }
+
+    .empty-state a {
+      color: #E25822;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .empty-state a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: #dc3545;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .success {
+      color: #28a745;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      nav {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      nav a, nav button {
+        margin-left: 0;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        padding: 1.5rem;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .recipe-actions {
+        flex-direction: column;
+      }
+    }
+    .debug-panel {
+  display: none !important; /* removes it completely */
+}
+
+.page-spacer {
+  height: 120px; /* fake space instead */
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1><i class="fas fa-user-circle"></i> My Profile</h1>
+      <nav>
+        <!-- ✅ Home button -->
+        <a href="main.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <!-- ✅ Logout button -->
+        <button onclick="logout()" class="nav-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </nav>
+    </div>
+  </header>
+  
+
+
+  <main class="container">
+    <section class="profile-section">
+      <div class="section-header">
+        <h2><i class="fas fa-user"></i> User Details</h2>
+      </div>
+      <div class="profile-card">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" id="profileUsername" placeholder="Username" disabled>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-signature"></i>
+          <input type="text" id="profileName" placeholder="Full Name" disabled>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="profileEmail" placeholder="Email" disabled>
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-phone"></i>
+          <input type="text" id="profilePhone" placeholder="Phone Number" disabled>
+        </div>
+      </div>
+    </section>
+
+    <section class="recipes-section">
+      <div class="section-header">
+        <h2><i class="fas fa-utensils"></i> My Recipes</h2>
+        <p>Manage your delicious creations</p>
+      </div>
+      
+      <div id="myRecipeList" class="grid">
+        <!-- Recipes will be loaded here -->
+      </div>
+      
+      <div id="emptyRecipes" class="empty-state" style="display: none;">
+        <i class="fas fa-utensils"></i>
+        <h3>No recipes yet</h3>
+        <p>You haven't created any recipes yet. <a href="#">Add your first recipe</a></p>
+      </div>
+    </section>
+
+    <!-- Debug Panel -->
+    <div class="debug-panel">
+      <h3><i class="fas fa-bug"></i> Debug Information</h3>
+      <p>This panel shows what's stored in localStorage to help identify the issue:</p>
+      <pre id="debugOutput">Loading debug data...</pre>
+      <button onclick="refreshDebugInfo()" class="btn-secondary">
+        <i class="fas fa-sync-alt"></i> Refresh Debug Info
+      </button>
+    </div>  
+
+    <!-- Edit Recipe Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2><i class="fas fa-edit"></i> Edit Recipe</h2>
+        <form id="editRecipeForm">
+          <input type="hidden" id="editRecipeId">
+          
+          <div class="input-group">
+            <i class="fas fa-pencil-alt"></i>
+            <input type="text" id="editRecipeTitle" placeholder="Recipe Title" required>
+          </div>
+          
+          <div class="input-group">
+            <i class="fas fa-tag"></i>
+            <select id="editRecipeType" required>
+              <option value="">Select Recipe Type</option>
+              <option value="veg">Vegetarian</option>
+              <option value="non-veg">Non-Vegetarian</option>
+            </select>
+          </div>
+          
+          <div class="input-group">
+            <i class="fas fa-list"></i>
+            <textarea id="editRecipeIngredients" placeholder="Ingredients (one per line)" required></textarea>
+          </div>
+          
+          <div class="input-group">
+            <i class="fas fa-list-ol"></i>
+            <textarea id="editRecipeInstructions" placeholder="Instructions (step by step)" required></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+            <button type="submit" class="btn-primary">
+              <i class="fas fa-save"></i> Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content confirm-modal">
+        <h2><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h2>
+        <p>Are you sure you want to delete "<span id="deleteRecipeName"></span>"? This action cannot be undone.</p>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+          <button type="button" class="btn-danger" id="confirmDelete">
+            <i class="fas fa-trash"></i> Delete Recipe
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ✅ Check if user is logged in
+    function checkAuth() {
+      const user = JSON.parse(localStorage.getItem('recipeHubCurrentUser') || 'null');
+      if (!user) {
+        window.location.href = 'login.html'; // redirect if not logged in
+        return null;
+      }
+      return user;
+    }
+
+    // ✅ Logout function
+    function logout() {
+      localStorage.removeItem('recipeHubCurrentUser');
+      alert("You have been logged out!");
+      window.location.href = 'login.html'; // redirect to login
+    }
+
+    // Load user profile
+    function loadUserProfile() {
+      const user = checkAuth();
+      if (!user) return;
+      document.getElementById('profileUsername').value = user.username || '';
+      document.getElementById('profileName').value = user.name || '';
+      document.getElementById('profileEmail').value = user.email || '';
+      document.getElementById('profilePhone').value = user.phone || '';
+    }
+
+    // Load user's recipes
+    function loadUserRecipes() {
+      const user = checkAuth();
+      if (!user) return;
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const userRecipes = recipes.filter(recipe => recipe.author === user.username);
+      const recipeList = document.getElementById('myRecipeList');
+      const emptyState = document.getElementById('emptyRecipes');
+      recipeList.innerHTML = '';
+      if (userRecipes.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+      }
+      emptyState.style.display = 'none';
+      userRecipes.forEach(recipe => {
+        const recipeCard = document.createElement('div');
+        recipeCard.className = 'recipe-card';
+        recipeCard.innerHTML = `
+          <div class="veg-indicator ${recipe.type === 'veg' ? 'veg' : 'non-veg'}">
+            <i class="fas ${recipe.type === 'veg' ? 'fa-leaf' : 'fa-drumstick-bite'}"></i>
+          </div>
+          <h3>${recipe.title}</h3>
+          <p class="author">By: ${recipe.author}</p>
+          <p class="ingredients-preview">${recipe.ingredients.split('\n').slice(0, 3).join(', ')}${recipe.ingredients.split('\n').length > 3 ? '...' : ''}</p>
+          <div class="recipe-actions">
+            <button class="btn-edit" onclick="openEditModal('${recipe.id}')">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+            <button class="btn-danger" onclick="openDeleteModal('${recipe.id}', '${recipe.title.replace(/'/g, "\\'")}')">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        `;
+        recipeList.appendChild(recipeCard);
+      });
+    }
+
+    // Edit Recipe Modal functions
+    function openEditModal(recipeId) {
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const recipe = recipes.find(r => r.id === recipeId);
+      if (!recipe) return;
+      document.getElementById('editRecipeId').value = recipe.id;
+      document.getElementById('editRecipeTitle').value = recipe.title;
+      document.getElementById('editRecipeType').value = recipe.type;
+      document.getElementById('editRecipeIngredients').value = recipe.ingredients;
+      document.getElementById('editRecipeInstructions').value = recipe.instructions;
+      document.getElementById('editModal').style.display = 'flex';
+    }
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Delete Confirmation Modal functions
+    function openDeleteModal(recipeId, recipeName) {
+      document.getElementById('deleteRecipeName').textContent = recipeName;
+      document.getElementById('confirmDelete').dataset.recipeId = recipeId;
+      document.getElementById('deleteModal').style.display = 'flex';
+    }
+    function closeDeleteModal() {
+      document.getElementById('deleteModal').style.display = 'none';
+    }
+
+    // Handle edit recipe form submission
+    document.getElementById('editRecipeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const recipeId = document.getElementById('editRecipeId').value;
+      const title = document.getElementById('editRecipeTitle').value;
+      const type = document.getElementById('editRecipeType').value;
+      const ingredients = document.getElementById('editRecipeIngredients').value;
+      const instructions = document.getElementById('editRecipeInstructions').value;
+      if (!title || !type || !ingredients || !instructions) {
+        alert('Please fill all fields');
+        return;
+      }
+      const user = checkAuth();
+      if (!user) return;
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const recipeIndex = recipes.findIndex(r => r.id === recipeId);
+      if (recipeIndex !== -1) {
+        recipes[recipeIndex] = {
+          ...recipes[recipeIndex],
+          title,
+          type,
+          ingredients,
+          instructions
+        };
+        localStorage.setItem('recipeHubRecipes', JSON.stringify(recipes));
+        closeEditModal();
+        loadUserRecipes();
+      }
+    });
+
+    // Handle delete confirmation
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+      const recipeId = this.dataset.recipeId;
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const updatedRecipes = recipes.filter(recipe => recipe.id !== recipeId);
+      localStorage.setItem('recipeHubRecipes', JSON.stringify(updatedRecipes));
+      closeDeleteModal();
+      loadUserRecipes();
+    });
+
+    // Debug functions
+    function refreshDebugInfo() {
+      const currentUser = JSON.parse(localStorage.getItem('recipeHubCurrentUser') || 'null');
+      const allUsers = JSON.parse(localStorage.getItem('recipeHubUsers') || '[]');
+      const recipes = JSON.parse(localStorage.getItem('recipeHubRecipes') || '[]');
+      const debugOutput = document.getElementById('debugOutput');
+      debugOutput.textContent = `Current User: ${JSON.stringify(currentUser, null, 2)}\n\nAll Users: ${JSON.stringify(allUsers, null, 2)}\n\nRecipes: ${JSON.stringify(recipes, null, 2)}`;
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      const user = checkAuth();
+      if (!user) return;
+      loadUserProfile();
+      loadUserRecipes();
+      refreshDebugInfo();
+      window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+          closeEditModal();
+          closeDeleteModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
